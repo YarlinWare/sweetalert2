@@ -23,8 +23,8 @@ install:
   - yarn
 
 test_script:
-  - yarn run build
-  - yarn run check:qunit
+  - yarn build
+  - yarn test:sauce
 
 notifications:
   - provider: Email

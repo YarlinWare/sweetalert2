@@ -15,7 +15,7 @@ module.exports = function (config) {
     edge: {
       base: 'SauceLabs',
       browserName: 'MicrosoftEdge',
-      version: 'latest'
+      version: '17.17134'
     },
     iphone: {
       base: 'SauceLabs',

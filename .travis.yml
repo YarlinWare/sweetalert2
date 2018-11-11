@@ -18,15 +18,7 @@ before_install:
   - npm i -g yarn
 
 script:
-  # xvfb-run is needed for headless testing with real browsers
-  - if [[ "$TRAVIS_EVENT_TYPE" != "cron" ]]; then
-      xvfb-run yarn test;
-    fi;
-
-  - if [[ "$TRAVIS_EVENT_TYPE" = "cron" ]]; then
-      travis_retry yarn test:sauce &&
-      yarn check:third-party;
-    fi;
+  - travis_retry yarn test:sauce
 
 notifications:
   email:
