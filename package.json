@@ -8,7 +8,7 @@
   "jsnext:main": "src/sweetalert2.js",
   "types": "sweetalert2.d.ts",
   "devDependencies": {
-    "@babel/core": "^7.1.5",
+    "@babel/core": "^7.1.6",
     "@babel/plugin-transform-object-assign": "^7.0.0",
     "@babel/preset-env": "^7.1.5",
     "@semantic-release/changelog": "^3.0.1",
