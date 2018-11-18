@@ -1,3 +1,6 @@
+import { warn } from '../utils/utils'
+
+
 // private global state for the queue feature
 let currentSteps = []
 
@@ -16,11 +19,26 @@ export const queue = function (steps) {
     (function step (i, callback) {
       if (i < currentSteps.length) {
         document.body.setAttribute('data-swal2-queue-step', i)
-
+        document.body.setAttribute('data-swal2-queue-step-back-enabled', currentSteps[i].enableBack)
+        if (currentSteps[i].enableBack) {
+          if (i === 0) {
+            warn('You cannot enable back on first element')
+          }  else {
+            currentSteps[i].showCancelButton = true
+            // currentSteps[i].reverseButtons = true
+            currentSteps[i].cancelButtonText = '&larr; Back'
+          }
+          if (i < queueResult.length ) {
+            // We've been here already ;-) 
+            currentSteps[i].inputValue = queueResult.pop()
+          }
+        }
         swal(currentSteps[i]).then((result) => {
           if (typeof result.value !== 'undefined') {
             queueResult.push(result.value)
             step(i + 1, callback)
+          } else if (result.dismiss && document.body.getAttribute('data-swal2-queue-step-back-enabled')) {
+            step(i - 1, callback)
           } else {
             resetQueue()
             resolve({ dismiss: result.dismiss })
