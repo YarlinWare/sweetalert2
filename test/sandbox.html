@@ -13,24 +13,40 @@
 
 <body>
 <script>
-  Swal({
-    title: 'Test modal with input',
-    html: 'custom <strong>content</strong>',
-    input: 'text',
-    type: 'success',
-    showCloseButton: true,
-    showCancelButton: true,
-    preConfirm: function (value) {
-      if (!value) {
-        Swal.showValidationMessage('Should not be empty!')
-      }
-    },
-    onOpen: function (modal) {
-      console.log(modal)
-    }
-  }).then(function (result) {
-    console.log(result)
-  })
+
+swal.mixin({
+  input: 'text',
+  confirmButtonText: 'Next &rarr;',
+  showCancelButton: true,
+  progressSteps: ['1', '2', '3'], 
+}).queue([
+  {
+    title: 'Question 1',
+    text: 'Chaining swal2 modals is easy', 
+    enableBack: true 
+  },
+  {
+   title: 'Question 2', 
+   enableBack: true 
+  },
+  {
+    title: 'Question 3', 
+    enableBack: true 
+  }
+]).then((result) => {
+  if (result.value) {
+    swal({
+      title: 'All done!',
+      html:
+        'Your answers: <pre><code>' +
+          JSON.stringify(result.value) +
+        '</code></pre>',
+      confirmButtonText: 'Lovely!'
+    })
+  }
+})
+
+
 </script>
 </body>
 </html>
